@@ -36,10 +36,10 @@ def sticker_country_handler(country_code):
 @main_routes.route('/users/<string:id>/friends', methods=['GET', 'POST'])
 def friend_handler(id):
     fns = {
-        'GET': user.friends,
-        # 'POST': user.add_friend
+        'GET': user.friends_string,
+        'POST': user.add_friend
     }
-    resp = fns[request.method](id)
+    resp = fns[request.method](request, id)
     return jsonify(resp)
 
 

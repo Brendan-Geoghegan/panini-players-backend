@@ -1,4 +1,5 @@
 from ..models.main import User
+from ..database.db import db
 
 
 def show(request):  # request == the id
@@ -44,3 +45,18 @@ def users_by_location(request):
             'location': user.location
         })
     return users
+
+
+def friends_string(request, id):
+    output = User.query.filter_by(id=str(id)).first()
+    friend_list = output.friends
+    print(friend_list)
+    return friend_list
+
+
+def add_friend(request, id):
+    data = request.json
+    profile = User.query.filter_by(id=str(id)).first()
+    profile.friends += f" {data['friend']}"
+    db.session.commit()
+    return show(id)
