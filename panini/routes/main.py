@@ -1,61 +1,72 @@
-from flask import Blueprint, request, jsonify
-from werkzeug.security import check_password_hash, generate_password_hash
+from flask import Blueprint, request, jsonify, redirect
 from werkzeug import exceptions
-from flask_login import login_required, login_user, logout_user, current_user
-from ..database.db import db
-from ..models.main import User
+from ..controllers import sticker, user
 
-auth = Blueprint("auth", __name__)
+main_routes = Blueprint('main', __name__)
 
-@auth.route("/register", methods=['GET', 'POST'])
-def register():
-    if request.method == 'POST':
-        data = request.json
-        id = data['id']
-        email = data['email']
-        username = data['username']
-        location= data['location']
-        password_1 = data['password_1']
-        password_2 = data['password_2']
-
-        email_exists = User.query.filter_by(email=email).first()
-        username_exists = User.query.filter_by(username=username).first()
-        if username_exists:
-            raise exceptions.BadRequest("Username already in database")
-        elif email_exists:
-            raise exceptions.BadRequest("Email already in database")
-        elif password_1 != password_2:
-            raise exceptions.BadRequest("Passwords have to be the same")
-        else:
-            new_user = User(id=id, email=email, username=username, password=generate_password_hash(password_1, method='sha256'), location=location)
-            db.session.add(new_user)
-            db.session.commit()
-            login_user(new_user, remember=True)
-            return jsonify({"message": "New user created"}), 201
-    else:
-        raise exceptions.BadRequest(f"Please fill in all required information")
+@main_routes.route('/<string:code>', methods=['GET', 'POST', 'PUT'])
+def sticker_handler(code):
+    fns = {
+        'GET': sticker.show,
+        'POST': sticker.add,
+        'PUT': sticker.remove
+    }
+    resp = fns[request.method](request, code)
+    return jsonify(resp)
 
 
-@auth.route("/login", methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        data = request.json
-        username = data['username']
-        password = data['password']
-        user = User.query.filter_by(username=username).first()
-        if user:
-            if check_password_hash(user.password, password):
-                login_user(user, remember=True)
-                return jsonify({"message": "Welcome Panini Player"}), 201
-            else:
-                raise exceptions.BadRequest(f"Incorrect password")
-        else:
-            raise exceptions.NotFound(f"User not found")
-    else:
-        raise exceptions.BadRequest(f"Please fill in all required information")
+@main_routes.route('/users/<string:id>')
+def user_handler(id):
+    fns = {
+        'GET': user.show
+    }
+    resp = fns[request.method](id)
+    return jsonify(resp)
 
-@login_required
-@auth.route("/logout")
-def logout():
-    logout_user()
-    return jsonify({"message": "See you soon!"})
+
+@main_routes.route('/country/<string:country_code>')
+# Get stickers by country code
+def sticker_country_handler(country_code):
+    fns = {
+        'GET': sticker.show_by_country
+    }
+    resp = fns[request.method](country_code)
+    return jsonify(resp)
+
+
+@main_routes.route('/users/<string:id>/friends', methods=['GET', 'POST'])
+def friend_handler(id):
+    fns = {
+        'GET': user.friends_string,
+        'POST': user.add_friend
+    }
+    resp = fns[request.method](request, id)
+    return jsonify(resp)
+
+
+@main_routes.route('/users/<string:id>/friends_list')
+def friends_list_handler(id):
+    fns = {
+        'GET': user.friends,
+    }
+    resp = fns[request.method](id)
+    return jsonify(resp)
+
+
+@main_routes.route('/users/<string:id>/stickers', methods=['GET', 'POST'])
+def all_stickers_handler(id):
+    fns = {
+        'GET': user.all_stickers,
+        # 'POST': user.add_friend
+    }
+    resp = fns[request.method](id)
+    return jsonify(resp)
+
+
+@main_routes.route('/users/location/<string:location>')
+def users_location_handler(location):
+    fns = {
+        'GET': user.users_by_location
+    }
+    resp = fns[request.method](location)
+    return jsonify(resp)

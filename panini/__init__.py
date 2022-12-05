@@ -4,7 +4,8 @@ from .database.db import db
 from dotenv import load_dotenv
 from os import environ
 from flask_login import LoginManager
-from .routes.main import auth
+from .routes.auth import auth
+from .routes.main import main_routes
 from werkzeug import exceptions
 
 #testing purposes
@@ -23,34 +24,11 @@ with server.app_context():
     db.app = server
     db.init_app(server)
 
-def add_code(user, input_code):
-    # say the code is ECU4
-    cards_array = user['cards'].split(' ')
-    for card in cards_array:
-        if str.__contains__(card, input_code):
-            # add conditionals here for cases where ECU1 and ECU10
-            index = cards_array.index(card)
-            unique = card
-    [code , num] = unique.split('-')
-    added = int(num) + 1
-    cards_array[index] = f"{code}-{added}"
-    return cards_array
-
-
+server.register_blueprint(main_routes, url_prefix="/")
 
 @server.route('/')
 def home():
-    users = User.query.all()
-    output = map(lambda y : {
-        'username' : y.username,
-        'cards' : y.cards
-    }, users)
-    print('######################')
-    sean = list(output)[0]
-    result = add_code(sean, 'ECU4')
-    print(result)
-    print('######################')
-    return list(output)
+    pass
 
 # auth start 
 server.config['SECRET_KEY'] = "secretkey"
