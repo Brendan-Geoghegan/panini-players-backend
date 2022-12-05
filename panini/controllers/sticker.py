@@ -1,8 +1,9 @@
-from ..models.main import Sticker
+from ..models.main import Sticker, User
 from ..database.db import db
+from ..helper import add_sticker, remove_sticker
 
-def show(request): # request == the code
-    output = Sticker.query.filter_by(code=str(request)).first()
+def show(request, code): # request == the code
+    output = Sticker.query.filter_by(code=str(code)).first()
     sticker = {
         'code': output.code,
         'name': output.name,
@@ -10,6 +11,20 @@ def show(request): # request == the code
         'price': output.price
     }
     return sticker
+
+def add(request, code):
+    data = request.json.get('user')
+    output = User.query.filter_by(id=str(data)).first() 
+    output.cards = add_sticker(output.cards, code)
+    db.session.commit()
+    return output.cards
+
+def remove(request, code):
+    data = request.json.get('user')
+    output = User.query.filter_by(id=str(data)).first() 
+    output.cards = remove_sticker(output.cards, code)
+    db.session.commit()
+    return output.cards
 
 def show_by_country(request):
     request.upper()

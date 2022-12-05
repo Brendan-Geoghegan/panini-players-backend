@@ -1,7 +1,7 @@
 from panini import db, server
 from panini.models.main import User, Sticker
 from panini.database.data import cards, stickers
-from helper import id_generator
+from panini.helper import id_generator
 
 #dummy data
 users = [

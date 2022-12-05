@@ -18,6 +18,7 @@ def friends(request ,id):
     output = User.query.filter_by(id=str(id)).first()
     friend_list = output.friends
     print(friend_list)
+    return friend_list
 
 
 def add_friend(request, id):

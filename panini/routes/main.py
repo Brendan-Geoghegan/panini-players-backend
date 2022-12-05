@@ -5,12 +5,14 @@ from ..controllers import sticker, user
 
 main_routes = Blueprint('main', __name__)
 
-@main_routes.route('/<string:code>')
+@main_routes.route('/<string:code>', methods=['GET', 'POST', 'PUT'])
 def sticker_handler(code):
     fns = {
-        'GET': sticker.show
+        'GET': sticker.show,
+        'POST': sticker.add,
+        'PUT': sticker.remove
     }
-    resp = fns[request.method](code)
+    resp = fns[request.method](request, code)
     return jsonify(resp)
 
 @main_routes.route('/users/<string:id>')
