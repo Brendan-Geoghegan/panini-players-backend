@@ -15,4 +15,5 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(30), unique=True)
     location = db.Column(db.String(15))
     cards = db.Column(db.String(5740))
+    friends = db.Column(db.String(1000))
     

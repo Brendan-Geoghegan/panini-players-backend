@@ -20,3 +20,21 @@ def user_handler(id):
     }
     resp = fns[request.method](id)
     return jsonify(resp)
+
+@main_routes.route('/country/<string:country_code>')
+# Get stickers by country code
+def sticker_country_handler(country_code):
+    fns = {
+        'GET': sticker.show_by_country
+    }
+    resp = fns[request.method](country_code)
+    return jsonify(resp)
+
+@main_routes.route('/users/<string:id>/friends', methods=['GET', 'POST'])
+def friend_handler(id):
+    fns = {
+        'GET': user.friends,
+        # 'POST': user.add_friend
+    }
+    resp = fns[request.method](id)
+    return jsonify(resp)
