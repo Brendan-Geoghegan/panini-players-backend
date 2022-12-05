@@ -1,4 +1,5 @@
 from ..database.db import db
+from flask_login import UserMixin
 
 class Sticker(db.Model):
     code = db.Column(db.String(10), primary_key=True)
@@ -6,7 +7,7 @@ class Sticker(db.Model):
     country = db.Column(db.String(15))
     position = db.Column(db.String(10))
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.String(10), primary_key=True, unique=True)
     username = db.Column(db.String(15), unique=True)
     password = db.Column(db.String(20))
