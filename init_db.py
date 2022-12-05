@@ -11,15 +11,6 @@ users = [
     {'username': 'Brendan', 'password': 'password456', 'email': 'Brendan@123.com', 'location': 'Lodon', 'cards':cards},
 ]
 
-
-
-# list = [
-#     {'user': 'afjonivew', 'panini': 0, 'FWC1': 1},
-#     {'user': 'fnaadvo', 'panini': 1, 'FWC1': 1},
-#     {'user': 'fmvidfjsd', 'panini': 1, 'FWC1': 0},
-#     {'user': 'mfnvrlkf', 'panini': 0, 'FWC1': 0},
-# ]
-
 def id_generator():
     letters = string.ascii_lowercase + string.digits
     id = ''.join(random.choice(letters) for i in range(10))
@@ -31,8 +22,4 @@ with server.app_context():
     for user in users:
         db.session.add(User(id=id_generator(), username=user['username'], password=user['password'], email=user['email'], location=user['location'], cards=user['cards']))
         db.session.commit()
-
-    # for cards in list:
-    #     db.session.add(List(user=cards['user'], panini=cards['panini'], fwc1=cards['FWC1'] ))
-    #     db.session.commit()
 

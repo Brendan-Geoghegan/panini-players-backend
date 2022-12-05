@@ -3,77 +3,10 @@
 QAT1 QAT2 QAT3 QAT4 QAT5 QAT6 QAT7 QAT8 QAT9 QAT10 QAT11 QAT12 QAT13 QAT14 QAT15 QAT16 QAT17 QAT18 QAT19 QAT20
 ECU1 ECU2 ECU3 ECU4 ECU5 ECU6 ECU7 ECU8 ECU9 ECU10 ECU11 ECU12 ECU13 ECU14 ECU15 ECU16 ECU17 ECU18 ECU19 ECU20 
 SEN1 SEN2 SEN3 SEN4 SEN5 SEN6 SEN7 SEN8 SEN9 SEN10 SEN11 SEN12 SEN13 SEN14 SEN15 SEN16 SEN17 SEN18 SEN19 SEN20"
-Netherlands
-NED1 Team Photo - Netherlands
-NED2 Team Logo FOIL - Netherlands
-NED3 Justin Bijlow - Netherlands
-NED4 Jasper Cillessen - Netherlands
-NED5 Daley Blind - Netherlands
-NED6 Matthijs de Ligt - Netherlands
-NED7 Stefan de Vrij - Netherlands
-NED8 Denzel Dumfries - Netherlands
-NED9 Virgil van Dijk - Netherlands
-NED10 Steven Berghuis - Netherlands
-NED11 Frenkie de Jong - Netherlands
-NED12 Ryan Gravenberch - Netherlands
-NED13 Davy Klaassen - Netherlands
-NED14 Teun Koopmeiners - Netherlands
-NED15 Georginio Wijnaldum - Netherlands
-NED16 Steven Bergwijn - Netherlands
-NED17 Arnaut Danjuma - Netherlands
-NED18 Memphis Depay - Netherlands
-NED19 Cody Gakpo - Netherlands
-NED20 Donyell Malen - Netherlands
-GROUP B
-England
-ENG1 Team Photo - England
-ENG2 Team Logo FOIL - England
-ENG3 Jordan Pickford - England
-ENG4 Aaron Ramsdale - England
-ENG5 Trent Alexander-Arnold - England
-ENG6 Conor Coady - England
-ENG7 Harry Maguire - England
-ENG8 Luke Shaw - England
-ENG9 John Stones - England
-ENG10 Kyle Walker - England
-ENG11 Jude Bellingham - England
-ENG12 Jack Grealish - England
-ENG13 Jordan Henderson - England
-ENG14 Mason Mount - England
-ENG15 Kalvin Phillips - England
-ENG16 Declan Rice - England
-ENG17 Phil Foden - England
-ENG18 Harry Kane - England
-ENG19 Bukayo Saka - England
-ENG20 Raheem Sterling - England
-Iran
-IRN1 Team Photo - Iran
-IRN2 Team Logo FOIL - Iran
-IRN3 Amir Abedzadeh - Iran
-IRN4 Alireza Beiranvand - Iran
-IRN5 Ehsan Hajsafi - Iran
-IRN6 Majid Hosseini - Iran
-IRN7 Hossein Kanaani - Iran
-IRN8 Shoja Khalilzadeh - Iran
-IRN9 Milad Mohammadi - Iran
-IRN10 Sadegh Moharrami - Iran
-IRN11 Omid Noorafkan - Iran
-IRN12 Vahid Amiri - Iran
-IRN13 Saeid Ezatolahi - Iran
-IRN14 Ali Gholizadeh - Iran
-IRN15 Alireza Jahanbakhsh - Iran
-IRN16 Ahmad Nourollahi - Iran
-IRN17 Karim Ansarifard - Iran
-IRN18 Sardar Azmoun - Iran
-IRN19 Saman Ghoddos - Iran
-IRN20 Mehdi Taremi - Iran
-USA
-USA1 Team Photo - USA
-USA2 Team Logo FOIL - USA
-USA3 Matt Turner - USA
-USA4 Zack Steffen - USA
-USA5 Sergiño Dest - USA
-USA6 Aaron Long - USA
+NED1 NED2 NED3 NED4 NED5 NED6 NED7 NED8 NED9 NED10 NED11 NED12 NED13 NED14 NED15 NED16 NED17 NED18 NED19 NED20 
+ENG1 ENG2 ENG3 ENG4 ENG5 ENG6 ENG7 ENG8 ENG9 ENG10 ENG11 ENG12 ENG13 ENG14 ENG15 ENG16 ENG17 ENG18 ENG19 ENG20
+IRN1 IRN2 IRN3 IRN4 IRN5 IRN6 IRN7 IRN8 IRN9 IRN10 IRN11 IRN12 IRN13 IRN14 IRN15 IRN16 IRN17 IRN18 IRN19 IRN20
+USA1 USA2 USA3 USA4 USA5 USA6 Aaron Long - USA
 USA7 Chris Richards - USA
 USA8 Antonee Robinson - USA
 USA9 DeAndre Yedlin - USA
