@@ -43,6 +43,15 @@ def friend_handler(id):
     return jsonify(resp)
 
 
+@main_routes.route('/users/<string:id>/friends_list')
+def friends_list_handler(id):
+    fns = {
+        'GET': user.friends,
+    }
+    resp = fns[request.method](id)
+    return jsonify(resp)
+
+
 @main_routes.route('/users/<string:id>/stickers', methods=['GET', 'POST'])
 def all_stickers_handler(id):
     fns = {
