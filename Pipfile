@@ -9,6 +9,7 @@ flask-sqlalchemy = "*"
 flask-cors = "*"
 python-dotenv = "*"
 flask-login = "*"
+colorama = "*"
 
 [dev-packages]
 autopep8 = "*"
