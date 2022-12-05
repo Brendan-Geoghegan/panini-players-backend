@@ -4,7 +4,8 @@ from .database.db import db
 from dotenv import load_dotenv
 from os import environ
 from flask_login import LoginManager
-from .routes.main import auth
+from .routes.auth import auth
+from .routes.main import main_routes
 from werkzeug import exceptions
 
 #testing purposes
@@ -22,6 +23,8 @@ server.config.update(
 with server.app_context():
     db.app = server
     db.init_app(server)
+
+server.register_blueprint(main_routes, url_prefix="/")
 
 def add_code(user, input_code):
     # say the code is ECU4
