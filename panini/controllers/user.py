@@ -1,4 +1,5 @@
 from ..models.main import User
+from ..database.db import db
 
 def show(request): # request == the id
     output = User.query.filter_by(id=str(request)).first()
@@ -13,10 +14,15 @@ def show(request): # request == the id
     }
     return user
 
-def friends(request):
-    output = User.query.filter_by(id=str(request)).first()
+def friends(request ,id):
+    output = User.query.filter_by(id=str(id)).first()
+    friend_list = output.friends
+    print(friend_list)
 
-    print(output.friends)
-    # friends = output.friends
-    # print (friends)
-    # return friends
+
+def add_friend(request, id):
+    data = request.json
+    profile = User.query.filter_by(id=str(id)).first() 
+    profile.friends += f" {data['friend']}"
+    db.session.commit() 
+    return show(id)

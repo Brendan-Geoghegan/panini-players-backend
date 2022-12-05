@@ -5,7 +5,7 @@ from helper import id_generator
 
 #dummy data
 users = [
-    {'username': 'Sean', 'password': 'password123', 'email': 'sean@123.com', 'location': 'Lodon', 'cards': cards, 'friends': '3ccdsumqnh c2cgns8sw7 hyzel98vng'},
+    {'username': 'Sean', 'password': 'password123', 'email': 'sean@123.com', 'location': 'Lodon', 'cards': cards, 'friends': ''},
     {'username': 'Kornelia', 'password': 'password234', 'email': 'kornelia@123.com', 'location': 'Lodon', 'cards': cards, 'friends': ''},
     {'username': 'George', 'password': 'password345', 'email': 'george@123.com', 'location': 'Lodon', 'cards': cards, 'friends': ''},
     {'username': 'Brendan', 'password': 'password456', 'email': 'Brendan@123.com', 'location': 'Lodon', 'cards':cards, 'friends': ''},

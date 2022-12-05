@@ -34,7 +34,7 @@ def sticker_country_handler(country_code):
 def friend_handler(id):
     fns = {
         'GET': user.friends,
-        # 'POST': user.add_friend
+        'POST': user.add_friend
     }
-    resp = fns[request.method](id)
+    resp = fns[request.method](request, id)
     return jsonify(resp)
