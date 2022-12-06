@@ -31,7 +31,7 @@ with server.app_context():
 
 @server.route('/')
 def home():
-    return 'Panin Players woooooooooop'
+    return 'Panini Players woooooooooop'
 
 @server.route('/trade', methods=['POST'])
 def trade():
