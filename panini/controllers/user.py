@@ -25,7 +25,7 @@ def show(request):  # request == the username
         'cards': output.cards,
         'friends': output.friends
     }
-    return user
+    return user, 200
 
 def friends(request):
     """Gets a list of the user's friends' IDs"""

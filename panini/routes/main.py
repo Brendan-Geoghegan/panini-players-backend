@@ -4,7 +4,7 @@ from ..controllers import sticker, user
 
 main_routes = Blueprint('main', __name__)
 
-@main_routes.route('/<string:code>', methods=['GET', 'POST', 'PUT'])
+@main_routes.route('/stickers/<string:code>', methods=['GET', 'POST', 'PUT'])
 def sticker_handler(code):
     fns = {
         'GET': sticker.show,

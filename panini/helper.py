@@ -24,24 +24,35 @@ def rarity_calculator(sticker):
 def add_sticker(cards, input_code):
     cards_array = cards.split(' ')
     for card in cards_array:
+        print('++++++++++++++++++++++++++')
         if str.__contains__(card, input_code):
-            # add conditionals here for cases where ECU1 and ECU10
+            unique = card 
+            [code , num] = unique.split('-')
+            print('###########')
             index = cards_array.index(card)
-            unique = card
-    [code , num] = unique.split('-')
+            if len(code) == 4:
+                break
+    print('**********************')    
     added = int(num) + 1
     cards_array[index] = f"{code}-{added}"
     return ' '.join(cards_array)
 
+
 def remove_sticker(cards, input_code):
-    #need to add conditional for when the user only has 1 sticker left
     cards_array = cards.split(' ')
-    for card in cards_array:
-        if str.__contains__(card, input_code):
-            # add conditionals here for cases where ECU1 and ECU10
-            index = cards_array.index(card)
-            unique = card
-    [code , num] = unique.split('-')
-    added = int(num) - 1
-    cards_array[index] = f"{code}-{added}"
-    return ' '.join(cards_array)
+    try:
+        for card in cards_array:
+            if str.__contains__(card, input_code):
+                index = cards_array.index(card)
+                unique = card 
+                [code , num] = unique.split('-')
+                if int(num) <= 1:
+                    raise Exception
+                if len(code) == 4:
+                    break
+        added = int(num) - 1
+        cards_array[index] = f"{code}-{added}"
+        return ' '.join(cards_array)
+    except Exception:
+        print("you dont have enough stickers")
+        return cards
