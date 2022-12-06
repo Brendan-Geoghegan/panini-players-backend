@@ -6,7 +6,7 @@ def test_get_individual_sticker(api):
 
 
 # def test_post_individual_sticker(api):
-#     """BRA1 sticker code returns object with sticker data"""
+#     """Adds sticker code to user's string of sticker codes"""
 #     pass
 
 
