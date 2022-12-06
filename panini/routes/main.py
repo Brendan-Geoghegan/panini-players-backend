@@ -14,11 +14,18 @@ def sticker_handler(code):
     resp, status = fns[request.method](request, code)
     return jsonify(resp), status
 
-
-@main_routes.route('/users/<string:id>')
-def user_handler(id):
+@main_routes.route('/users/<string:username>')
+def user_handler(username):
     fns = {
         'GET': user.show
+    }
+    resp = fns[request.method](username)
+    return jsonify(resp)
+
+@main_routes.route('/friends/<string:id>')
+def friend_handler(id):
+    fns = {
+        'GET': user.show_friend
     }
     resp, status = fns[request.method](id)
     return jsonify(resp), status
@@ -35,7 +42,7 @@ def sticker_country_handler(country_code):
 
 
 @main_routes.route('/users/<string:id>/friends', methods=['GET', 'POST'])
-def friend_handler(id):
+def friend_handler2(id):
     fns = {
         'GET': user.friends_string,
         'POST': user.add_friend
@@ -69,4 +76,9 @@ def users_location_handler(location):
         'GET': user.users_by_location
     }
     resp, status = fns[request.method](location)
+    return jsonify(resp), status
+
+@main_routes.route('/location', methods=['POST'])
+def handle_location():
+    resp, status = user.change_location(request)
     return jsonify(resp), status

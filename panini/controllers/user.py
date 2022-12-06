@@ -1,7 +1,7 @@
 from ..models.main import User
 from ..database.db import db
 
-def show(request):  # request == the id
+def show_friend(request):  # request == the id
     output = User.query.filter_by(id=str(request)).first()
     user = {
         'id': output.id,
@@ -14,6 +14,18 @@ def show(request):  # request == the id
     }
     return user, 200
 
+def show(request):  # request == the username
+    output = User.query.filter_by(username=str(request)).first()
+    user = {
+        'id': output.id,
+        'username': output.username,
+        'password': output.password,
+        'email': output.email,
+        'location': output.location,
+        'cards': output.cards,
+        'friends': output.friends
+    }
+    return user
 
 def friends(request):
     """Gets a list of the user's friends' IDs"""
@@ -58,5 +70,12 @@ def add_friend(request, id):
     profile = User.query.filter_by(id=str(id)).first()
     profile.friends += f" {data['friend']}"
     db.session.commit()
-    return show(id), 201
-    
+    return show_friend(id), 201
+
+def change_location(request):
+    data = request.json
+    print(data)
+    profile = User.query.filter_by(id=str(data["id"])).first()
+    profile.location = data["location"]
+    db.session.commit()
+    return show_friend(id), 201

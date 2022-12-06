@@ -4,6 +4,7 @@ from werkzeug import exceptions
 from flask_login import login_required, login_user, logout_user, current_user
 from ..database.db import db
 from ..models.main import User
+from panini.database.data import cards
 
 auth = Blueprint("auth", __name__)
 
@@ -27,7 +28,7 @@ def register():
         elif password_1 != password_2:
             raise exceptions.BadRequest("Passwords have to be the same")
         else:
-            new_user = User(id=id, email=email, username=username, password=generate_password_hash(password_1, method='sha256'), location=location)
+            new_user = User(id=id, email=email, username=username, password=generate_password_hash(password_1, method='sha256'), location=location, cards=cards, friends="")
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
