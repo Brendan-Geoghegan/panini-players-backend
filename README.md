@@ -39,26 +39,34 @@ Backend repository for Panini Players' trading platform.
 - Hosted repo on Render
 - Testing
 ## Screenshots
-Scraped uncleaned data:
+### Scraped uncleaned data:
+
 ![uncleaned data](/images/uncleaned_data1.png)
 
-Scraped semi-cleaned data:
+### Scraped semi-cleaned data:
+
 ![semi-cleaned data](/images/cleaning_data_1.png)
 
-Final cleaned data:
+### Final cleaned data:
+
 ![semi-cleaned data](/images/final_cleaned_data.png)
 
-Encoded cleaned data json:
+### Encoded cleaned data json:
+
 ![semi-cleaned data](/images/encoded_cleaned_data.png)
 
-Decoded cleaned data json:
+### Decoded cleaned data json:
+
 ![semi-cleaned data](/images/decoded_cleaned_data.png)
 
-Python data-cleaning code:
+### Python data-cleaning code:
+
 ![semi-cleaned data](/images/data_cleaning_code.png)
 
-Test coverage report (84%)
+### Test coverage report (84%)
+
 ![semi-cleaned data](/images/backend_cov_report.png)
+
 ## Wins & Challenges
 ### Wins
 - 86% test coverage!
