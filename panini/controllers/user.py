@@ -1,7 +1,6 @@
 from ..models.main import User
 from ..database.db import db
 
-
 def show(request):  # request == the id
     output = User.query.filter_by(id=str(request)).first()
     user = {
@@ -13,14 +12,14 @@ def show(request):  # request == the id
         'cards': output.cards,
         'friends': output.friends
     }
-    return user
+    return user, 200
 
 
 def friends(request):
     """Gets a list of the user's friends' IDs"""
     outputs = User.query.filter_by(id=str(request)).first()
     friends = outputs.friends.split(' ')
-    return friends
+    return friends, 200
 
 
 def all_stickers(request):
@@ -31,7 +30,7 @@ def all_stickers(request):
     for sticker in stickers:
         split = sticker.split('-')
         sticker_counts[split[0]] = int(split[1])
-    return sticker_counts
+    return sticker_counts, 200
 
 
 def users_by_location(request):
@@ -44,14 +43,14 @@ def users_by_location(request):
             'username': user.username,
             'location': user.location
         })
-    return users
+    return users, 200
 
 
 def friends_string(request, id):
     output = User.query.filter_by(id=str(id)).first()
     friend_list = output.friends
     print(friend_list)
-    return friend_list
+    return friend_list, 200
 
 
 def add_friend(request, id):
@@ -59,4 +58,5 @@ def add_friend(request, id):
     profile = User.query.filter_by(id=str(id)).first()
     profile.friends += f" {data['friend']}"
     db.session.commit()
-    return show(id)
+    return show(id), 201
+    

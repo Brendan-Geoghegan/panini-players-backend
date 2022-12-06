@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from .database.db import db
 from dotenv import load_dotenv
@@ -7,11 +7,15 @@ from flask_login import LoginManager
 from .routes.auth import auth
 from .routes.main import main_routes
 from werkzeug import exceptions
-
-#testing purposes
+from flask_mail import Message
+from .mailers import mail_config
 from .models.main import User
 
 server = Flask(__name__)
+mail = mail_config(server)
+server.register_blueprint(auth, url_prefix="/")
+server.register_blueprint(main_routes, url_prefix="/")
+
 CORS(server)
 
 load_dotenv()
@@ -24,18 +28,23 @@ with server.app_context():
     db.app = server
     db.init_app(server)
 
-server.register_blueprint(main_routes, url_prefix="/")
 
 @server.route('/')
 def home():
     pass
 
+@server.route('/trade', methods=['POST'])
+def trade():
+    sender = request.form['username']
+    receiver = request.form['receiver']
+    msg = Message(f'{sender} wants to trade with you!', sender="millington.sean12@gmail.com", recipients=[receiver])
+    mail.send(msg)
+    return "messge sent", 200
+
 # auth start 
 server.config['SECRET_KEY'] = "secretkey"
 server.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///panini.db'
 db.init_app(server)
-
-server.register_blueprint(auth, url_prefix="/")
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
@@ -62,4 +71,3 @@ def handle_400(err):
 
 if __name__ == "__main__":
     server.run(debug=True)
-

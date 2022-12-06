@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, redirect
+from flask import Blueprint, request, jsonify
 from werkzeug import exceptions
 from ..controllers import sticker, user
 
@@ -11,8 +11,8 @@ def sticker_handler(code):
         'POST': sticker.add,
         'PUT': sticker.remove
     }
-    resp = fns[request.method](request, code)
-    return jsonify(resp)
+    resp, status = fns[request.method](request, code)
+    return jsonify(resp), status
 
 
 @main_routes.route('/users/<string:id>')
@@ -20,8 +20,8 @@ def user_handler(id):
     fns = {
         'GET': user.show
     }
-    resp = fns[request.method](id)
-    return jsonify(resp)
+    resp, status = fns[request.method](id)
+    return jsonify(resp), status
 
 
 @main_routes.route('/country/<string:country_code>')
@@ -30,8 +30,8 @@ def sticker_country_handler(country_code):
     fns = {
         'GET': sticker.show_by_country
     }
-    resp = fns[request.method](country_code)
-    return jsonify(resp)
+    resp, status = fns[request.method](country_code)
+    return jsonify(resp), status
 
 
 @main_routes.route('/users/<string:id>/friends', methods=['GET', 'POST'])
@@ -40,8 +40,8 @@ def friend_handler(id):
         'GET': user.friends_string,
         'POST': user.add_friend
     }
-    resp = fns[request.method](request, id)
-    return jsonify(resp)
+    resp, status = fns[request.method](request, id)
+    return jsonify(resp), status
 
 
 @main_routes.route('/users/<string:id>/friends_list')
@@ -49,8 +49,8 @@ def friends_list_handler(id):
     fns = {
         'GET': user.friends,
     }
-    resp = fns[request.method](id)
-    return jsonify(resp)
+    resp, status = fns[request.method](id)
+    return jsonify(resp), status
 
 
 @main_routes.route('/users/<string:id>/stickers', methods=['GET', 'POST'])
@@ -59,8 +59,8 @@ def all_stickers_handler(id):
         'GET': user.all_stickers,
         # 'POST': user.add_friend
     }
-    resp = fns[request.method](id)
-    return jsonify(resp)
+    resp, status = fns[request.method](id)
+    return jsonify(resp), status
 
 
 @main_routes.route('/users/location/<string:location>')
@@ -68,5 +68,5 @@ def users_location_handler(location):
     fns = {
         'GET': user.users_by_location
     }
-    resp = fns[request.method](location)
-    return jsonify(resp)
+    resp, status = fns[request.method](location)
+    return jsonify(resp), status
