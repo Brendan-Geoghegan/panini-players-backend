@@ -25,7 +25,7 @@ def show(request):  # request == the username
         'cards': output.cards,
         'friends': output.friends
     }
-    return user
+    return user, 200
 
 def friends(request):
     """Gets a list of the user's friends' IDs"""
@@ -78,4 +78,4 @@ def change_location(request):
     profile = User.query.filter_by(id=str(data["id"])).first()
     profile.location = data["location"]
     db.session.commit()
-    return show_friend(id), 201
+    return show_friend(data['id']), 201
