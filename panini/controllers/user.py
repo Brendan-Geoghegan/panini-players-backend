@@ -78,4 +78,4 @@ def change_location(request):
     profile = User.query.filter_by(id=str(data["id"])).first()
     profile.location = data["location"]
     db.session.commit()
-    return show_friend(id), 201
+    return show_friend(data['id']), 201
