@@ -13,11 +13,3 @@ def test_rarity_calculator(api):
         "image": "cdn.shopify.com/s/files/1/0561/4639/5336/products/IMG_1761@2x.jpg",
         "price": "£0.99"
     }) == 5
-
-
-# def test_add_sticker(api):
-#     pass
-
-
-# def test_remove_sticker(api):
-#     pass
