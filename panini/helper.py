@@ -20,19 +20,19 @@ def rarity_calculator(sticker):
     else:
         rarity = 5
     return rarity
-    
+
+
 def add_sticker(cards, input_code):
     cards_array = cards.split(' ')
     for card in cards_array:
-        print('++++++++++++++++++++++++++')
         if str.__contains__(card, input_code):
-            unique = card 
-            [code , num] = unique.split('-')
+            unique = card
+            [code, num] = unique.split('-')
             print('###########')
             index = cards_array.index(card)
             if len(code) == 4:
                 break
-    print('**********************')    
+    print('**********************')
     added = int(num) + 1
     cards_array[index] = f"{code}-{added}"
     return ' '.join(cards_array)
@@ -44,8 +44,8 @@ def remove_sticker(cards, input_code):
         for card in cards_array:
             if str.__contains__(card, input_code):
                 index = cards_array.index(card)
-                unique = card 
-                [code , num] = unique.split('-')
+                unique = card
+                [code, num] = unique.split('-')
                 if int(num) <= 1:
                     raise Exception
                 if len(code) == 4:
