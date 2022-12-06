@@ -70,5 +70,8 @@ Backend repository for Panini Players' trading platform.
 ## Wins & Challenges
 ### Wins
 - 86% test coverage!
+- Used web scraper to get required data
+- Effectively cleaned web-scraped data using python (pandas)
 ### Challenges
+- Finding right data for requirements of app
 - Testing auth (92% coverage achieved in the end)
