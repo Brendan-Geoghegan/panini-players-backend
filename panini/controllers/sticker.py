@@ -3,6 +3,7 @@ from ..database.db import db
 from ..helper import add_sticker, remove_sticker
 
 def show(request, code): # request == the code
+    # request.upper()
     output = Sticker.query.filter_by(code=str(code)).first()
     sticker = {
         'code': output.code,
@@ -27,7 +28,7 @@ def remove(request, code):
     return output.cards
 
 def show_by_country(request):
-    request.upper()
+    # request.upper()
     outputs = Sticker.query.filter(Sticker.code.contains(request)).all()
     stickers = []
     for sticker in outputs:
