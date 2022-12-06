@@ -20,7 +20,8 @@ def rarity_calculator(sticker):
     else:
         rarity = 5
     return rarity
-    
+
+
 def add_sticker(cards, input_code):
     cards_array = cards.split(' ')
     for card in cards_array:
@@ -28,20 +29,21 @@ def add_sticker(cards, input_code):
             # add conditionals here for cases where ECU1 and ECU10
             index = cards_array.index(card)
             unique = card
-    [code , num] = unique.split('-')
+    [code, num] = unique.split('-')
     added = int(num) + 1
     cards_array[index] = f"{code}-{added}"
     return ' '.join(cards_array)
 
+
 def remove_sticker(cards, input_code):
-    #need to add conditional for when the user only has 1 sticker left
+    # need to add conditional for when the user only has 1 sticker left
     cards_array = cards.split(' ')
     for card in cards_array:
         if str.__contains__(card, input_code):
             # add conditionals here for cases where ECU1 and ECU10
             index = cards_array.index(card)
             unique = card
-    [code , num] = unique.split('-')
+    [code, num] = unique.split('-')
     added = int(num) - 1
     cards_array[index] = f"{code}-{added}"
     return ' '.join(cards_array)
