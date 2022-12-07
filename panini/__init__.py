@@ -37,7 +37,7 @@ def home():
 def trade():
     sender = request.json['username']
     receiver = request.json['receiver']
-    msg = Message(f'{sender} wants to trade with you!', sender="millington.sean12@gmail.com", recipients=[receiver])
+    msg = Message(f'{sender} wants to trade with you!', sender="panini.players@futureproof.com", recipients=[receiver])
     mail.send(msg)
     return "messge sent", 200
 
