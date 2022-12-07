@@ -14,6 +14,7 @@ flask-mail = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
 pytest = "*"
+requests = "*"
 
 [dev-packages]
 autopep8 = "*"
@@ -23,6 +24,7 @@ python_version = "3.10"
 
 [scripts]
 dev = "bash -c \"export FLASK_APP=panini && flask run\""
-test = "pytest --cov ."
+test = "pytest ."
+coverage = "pytest --cov ."
 init_db = "python init_db.py"
 start = "gunicorn panini:server"
