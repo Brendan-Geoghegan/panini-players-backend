@@ -56,7 +56,9 @@ def users_by_location(request):
         users.append({
             'id': user.id,
             'username': user.username,
-            'location': user.location
+            'email': user.email,
+            'location': user.location,
+            'cards': user.cards
         })
     return users, 200
 
