@@ -31,13 +31,13 @@ with server.app_context():
 
 @server.route('/')
 def home():
-    return 'Panin Players woooooooooop'
+    return 'Panini Players woooooooooop'
 
 @server.route('/trade', methods=['POST'])
 def trade():
-    sender = request.form['username']
-    receiver = request.form['receiver']
-    msg = Message(f'{sender} wants to trade with you!', sender="millington.sean12@gmail.com", recipients=[receiver])
+    sender = request.json['username']
+    receiver = request.json['receiver']
+    msg = Message(f'{sender} wants to trade with you!', sender="panini.players@futureproof.com", recipients=[receiver])
     mail.send(msg)
     return "messge sent", 200
 

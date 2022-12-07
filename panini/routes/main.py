@@ -14,6 +14,7 @@ def sticker_handler(code):
     resp, status = fns[request.method](request, code)
     return jsonify(resp), status
 
+
 @main_routes.route('/users/<string:username>')
 def user_handler(username):
     fns = {
@@ -21,6 +22,7 @@ def user_handler(username):
     }
     resp = fns[request.method](username)
     return jsonify(resp)
+
 
 @main_routes.route('/friends/<string:id>')
 def friend_handler(id):
@@ -77,6 +79,7 @@ def users_location_handler(location):
     }
     resp, status = fns[request.method](location)
     return jsonify(resp), status
+
 
 @main_routes.route('/location', methods=['POST'])
 def handle_location():

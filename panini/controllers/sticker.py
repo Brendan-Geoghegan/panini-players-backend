@@ -25,7 +25,7 @@ def remove(request, code):
     output = User.query.filter_by(id=str(data)).first() 
     output.cards = remove_sticker(output.cards, code)
     db.session.commit()
-    return output.cards, 301
+    return output.cards, 200
 
 def show_by_country(request):
     # request.upper()
