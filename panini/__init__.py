@@ -10,13 +10,16 @@ from werkzeug import exceptions
 from flask_mail import Message
 from .mailers import mail_config
 from .models.main import User
+from flask_socketio import SocketIO, emit, join_room, leave_room, send
 
 server = Flask(__name__)
 mail = mail_config(server)
 server.register_blueprint(auth, url_prefix="/")
 server.register_blueprint(main_routes, url_prefix="/")
 
-CORS(server)
+CORS(server, resources={r"/*":{"origins":"*"}})
+socketio = SocketIO(server, cors_allowed_origins="*")
+server.host = 'localhost'
 
 load_dotenv()
 server.config.update(
@@ -37,7 +40,7 @@ def home():
 def trade():
     sender = request.json['username']
     receiver = request.json['receiver']
-    msg = Message(f'{sender} wants to trade with you!', sender="millington.sean12@gmail.com", recipients=[receiver])
+    msg = Message(f'{sender} wants to trade with you!', sender="panini.players@futureproof.com", recipients=[receiver])
     mail.send(msg)
     return "messge sent", 200
 
@@ -53,6 +56,7 @@ login_manager.init_app(server)
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
+# auth end
 
 @server.errorhandler(exceptions.NotFound)
 def handle_404(err):
@@ -67,7 +71,42 @@ def handle_500(err):
 def handle_400(err):
     return jsonify({"error":  f"{err}"}), 400
 
-# auth end
+
+# socket 
+@socketio.on("connect")
+def connected():
+    """event listener when client connects to the server"""
+    print(request.sid)
+    print("client has connected")
+    emit("connect",{"data":f"id: {request.sid} is connected"})
+
+@socketio.on('join')
+def on_join(data):
+    username = data['username']
+    room = data['room']
+    join_room(room)
+    send(username + ' has entered the room.', to=request.sid, broadcast=True)
+
+@socketio.on('leave')
+def on_leave(data):
+    username = data['username']
+    room = data['room']
+    leave_room(room)
+    send(username + ' has left the room.', to=request.sid, broadcast=True) 
+
+@socketio.on('data')
+def handle_message(data):
+    """event listener when client types a message"""
+    print("data from the front end: ",str(data))
+    emit("data",{'data':data,'id':request.sid},broadcast=True)
+
+@socketio.on("disconnect")
+def disconnected():
+    """event listener when client disconnects to the server"""
+    print("user disconnected")
+    emit("disconnect",f"user {request.sid} disconnected",broadcast=True)
+#end socket io
 
 if __name__ == "__main__":
-    server.run(debug=True)
+    # server.run(debug=True)
+    socketio.run(server, debug=True)

@@ -15,6 +15,7 @@ gunicorn = "*"
 psycopg2-binary = "*"
 pytest = "*"
 requests = "*"
+flask-socketio = "*"
 
 [dev-packages]
 autopep8 = "*"
