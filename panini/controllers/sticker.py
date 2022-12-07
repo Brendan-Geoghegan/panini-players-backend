@@ -1,6 +1,6 @@
 from ..models.main import Sticker, User
 from ..database.db import db
-from ..helper import add_sticker, remove_sticker
+from ..helper import add_sticker, remove_sticker, rarity_calculator
 
 def show(request, code): # request == the code
     # request.upper()
@@ -36,6 +36,7 @@ def show_by_country(request):
             'code': sticker.code,
             'name': sticker.name,
             'image': sticker.image,
-            'price': sticker.price
+            'price': sticker.price,
+            'rarity': rarity_calculator(sticker)
         })
     return stickers, 200
