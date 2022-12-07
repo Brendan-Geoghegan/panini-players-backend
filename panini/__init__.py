@@ -10,7 +10,7 @@ from werkzeug import exceptions
 from flask_mail import Message
 from .mailers import mail_config
 from .models.main import User
-from flask_socketio import SocketIO, emit, join_room, leave_room, send
+from flask_socketio import SocketIO, emit
 
 server = Flask(__name__)
 mail = mail_config(server)
@@ -79,20 +79,6 @@ def connected():
     print(request.sid)
     print("client has connected")
     emit("connect",{"data":f"id: {request.sid} is connected"})
-
-@socketio.on('join')
-def on_join(data):
-    username = data['username']
-    room = data['room']
-    join_room(room)
-    send(username + ' has entered the room.', to=request.sid, broadcast=True)
-
-@socketio.on('leave')
-def on_leave(data):
-    username = data['username']
-    room = data['room']
-    leave_room(room)
-    send(username + ' has left the room.', to=request.sid, broadcast=True) 
 
 @socketio.on('data')
 def handle_message(data):
