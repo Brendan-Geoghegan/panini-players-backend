@@ -5,6 +5,7 @@ from flask_login import login_required, login_user, logout_user, current_user
 from ..database.db import db
 from ..models.main import User
 from panini.database.data import cards
+from ..helper import id_generator
 
 auth = Blueprint("auth", __name__)
 
@@ -12,7 +13,7 @@ auth = Blueprint("auth", __name__)
 def register():
     if request.method == 'POST':
         data = request.json
-        id = data['id']
+        id = id_generator()
         email = data['email']
         username = data['username']
         location= data['location']
